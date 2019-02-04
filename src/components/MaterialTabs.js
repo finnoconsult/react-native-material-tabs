@@ -12,6 +12,7 @@ import type { ContentType } from './Tab/Tab';
 type Props = {
   allowFontScaling: boolean,
   selectedIndex: number,
+  tabWidth: number,
   barColor: string,
   barHeight: number,
   activeTextColor: string,
@@ -39,6 +40,7 @@ export default class MaterialTabs extends React.Component<Props, State> {
   static propTypes = {
     allowFontScaling: PropTypes.bool,
     selectedIndex: PropTypes.number,
+    tabWidth: PropTypes.number,
     barColor: PropTypes.string,
     barHeight: PropTypes.number,
     activeTextColor: PropTypes.string,
@@ -145,6 +147,8 @@ export default class MaterialTabs extends React.Component<Props, State> {
   getTabWidth(width: number) {
     if (!this.props.scrollable) {
       this.setState({ tabWidth: width / this.props.items.length });
+    } else if (this.props.scrollable && this.props.tabWidth) {
+      this.setState({ tabWidth: this.props.tabWidth });
     }
     this.setState({
       barWidth: width,
